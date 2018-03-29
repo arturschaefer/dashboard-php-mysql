@@ -17,7 +17,7 @@ function enviaCPF() {
     httpObject = getHTTPObject();
 
     if (httpObject != null) {
-        httpObject.open("GET", "upperCase.php?cpf_entrada=" + document.getElementById('cpf_entrada').value, true);
+        httpObject.open("GET", "ajax_calls.php?cpf_entrada=" + document.getElementById('cpf_entrada').value, true);
         httpObject.send(null);
         httpObject.onreadystatechange = setOutput;
     }
@@ -28,7 +28,18 @@ function enviaSGS() {
     httpObject = getHTTPObject();
 
     if (httpObject != null) {
-        httpObject.open("GET", "upperCase.php?sgs=" + document.getElementById('sgs').value, true);
+        httpObject.open("GET", "ajax_calls.php?sgs=" + document.getElementById('sgs').value, true);
+        httpObject.send(null);
+        httpObject.onreadystatechange = setOutput;
+    }
+}
+
+function enviaSGC() {
+
+    httpObject = getHTTPObject();
+
+    if (httpObject != null) {
+        httpObject.open("GET", "ajax_calls.php?sgc=" + document.getElementById('sgc').value, true);
         httpObject.send(null);
         httpObject.onreadystatechange = setOutput;
     }

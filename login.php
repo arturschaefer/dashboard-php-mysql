@@ -7,8 +7,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Sufee Admin - HTML5 Admin Template</title>
-        <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+        <title>Synergia</title>
+        <meta name="description" content="Synergia">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-icon.png">
@@ -29,39 +29,36 @@
 
     </head>
     <body class="bg-dark">
-        <?php
-        if (isset($_SESSION['msg'])) {
-            if ($_SESSION['msg'])
-                echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-        }
-        ?>
         <div class="sufee-login d-flex align-content-center flex-wrap">
             <div class="container">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a href="index.html">
-                            <img class="align-content" src="images/logo.png" alt="">
+                        <a href="login.php">
+                            <img class="align-content" src="images/Synergia_memberTPF_white.png" alt="">
                         </a>
                     </div>
                     <div class="login-form">
+                        <center>
+                            <strong>
+                                <div>
+                                    <?php
+                                    if (isset($_SESSION['msg'])) {
+                                        if ($_SESSION['msg'])
+                                            echo $_SESSION['msg'];
+                                        unset($_SESSION['msg']);
+                                    }
+                                    ?>
+                                </div>
+                            </strong>
+                        </center>
                         <form method="POST" action="validation.php">
                             <div class="form-group">
-                                <label>Email address</label>
+                                <label>Nome de usuário</label>
                                 <input type="text" name="usuario" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>Senha</label>
                                 <input type="password" name="senha" class="form-control" placeholder="Password">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember Me
-                                </label>
-                                <label class="pull-right">
-                                    <a href="#">Forgotten Password?</a>
-                                </label>
-
                             </div>
                             <input type="submit" name="btnLogin" value="Acessar"
                                    class="btn btn-success btn-flat m-b-30 m-t-30" onclick="myFunction()">
@@ -70,9 +67,5 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
-        Usuário cadastrado no Banco de Dados<br>
-        Usuário: cesar@celke.com.br <br>
-        Senha: 123 <br>
     </body>
 </html>

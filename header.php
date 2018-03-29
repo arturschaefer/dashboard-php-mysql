@@ -5,7 +5,7 @@
         <div class="col-sm-7">
             <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
             <div class="header-left">
-                
+
             </div>
         </div>
 
@@ -16,38 +16,24 @@
                 </a>
 
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                    <a class="nav-link" href="#"><i class="fa fa- user"></i>
+                        <?php
+                        if (!isset($_SESSION)) {
+                            session_start();
+                        }
+                        if (empty($_SESSION['id'])) {
+                            $_SESSION['msg'] = "Área restrita";
+                            header("Location: login.php");
+                        }
+                        echo $_SESSION['nome'];
+                        ?>
+                    </a>
 
-                    <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                    <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
+                    <a class="nav-link" href="#"><i class="fa fa -cog"></i>Configurações</a>
                     <a class="nav-link" href="sair.php"><i class="fa fa-power -off"></i>Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
 </header><!-- /header -->
 <!-- Header-->
-
-<!--<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Table</a></li>
-                    <li class="active">Data table</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>-->

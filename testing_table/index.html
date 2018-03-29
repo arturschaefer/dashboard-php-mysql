@@ -1,0 +1,155 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <title>Live Add Edit Delete Datatables Records using PHP Ajax</title>
+        <script src="../assets/js/jQuery/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="../assets/js/jQuery/bootstrap.min.css" />
+        <script src="../assets/js/jQuery/jquery.dataTables.min.js"></script>
+        <script src="../assets/js/jQuery/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../assets/js/jQuery/bootstrap-datepicker.css" />
+        <script src="../assets/js/jQuery/bootstrap-datepicker.js"></script>
+        <style>
+            body
+            {
+                margin:0;
+                padding:0;
+                background-color:#f1f1f1;
+            }
+            .box
+            {
+                width:1270px;
+                padding:20px;
+                background-color:#fff;
+                border:1px solid #ccc;
+                border-radius:5px;
+                margin-top:25px;
+                box-sizing:border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container box">
+            <div class="table-responsive">
+                <div id="alert_message"></div>
+                <table id="user_data" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>SGC</th>
+                            <th>Indexador</th>
+                            <th>Nome</th>
+                            <th>SGS Pessoa</th>
+                            <th>Sexo</th>
+                            <th>CPF</th>
+                            <th>RG</th>
+                            <th>Data de Nascimento</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript" language="javascript" >
+    $(document).ready(function () {
+
+        fetch_data();
+
+        function fetch_data()
+        {
+            var dataTable = $('#user_data').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "ajax": {
+                    url: "fetch.php",
+                    type: "POST"
+                }
+            });
+        }
+
+//        function update_data(cod, sgc_pessoa, value)
+//        {
+//            $.ajax({
+//                url: "update.php",
+//                method: "POST",
+//                data: {cod: cod, sgc_pessoa: sgc_pessoa, value: value},
+//                success: function (data)
+//                {
+//                    $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
+//                    $('#user_data').DataTable().destroy();
+//                    fetch_data();
+//                }
+//            });
+//            setInterval(function () {
+//                $('#alert_message').html('');
+//            }, 5000);
+//        }
+
+        $(document).on('blur', '.update', function () {
+            var id = $(this).data("cod");
+            var column_name = $(this).data("column");
+            var value = $(this).text();
+            update_data(id, column_name, value);
+        });
+
+        $('#add').click(function () {
+            var html = '<tr>';
+            html += '<td contenteditable id="data1"></td>';
+            html += '<td contenteditable id="data2"></td>';
+            html += '<td contenteditable id="data3"></td>';
+            html += '<td contenteditable id="data4"></td>';
+            html += '<td><button type="button" name="insert" id="insert" class="btn btn-success btn-xs">Insert</button></td>';
+            html += '</tr>';
+            $('#user_data tbody').prepend(html);
+        });
+
+//        $(document).on('click', '#insert', function () {
+//            var sgc_pessoa = $('#data1').text();
+//            var indexador = $('#data2').text();
+//            if (indexador != '' && sgc_pessoa != '')
+//            {
+//                $.ajax({
+//                    url: "insert.php",
+//                    method: "POST",
+//                    data: {sgc_pessoa: sgc_pessoa, indexador: indexador},
+//                    success: function (data)
+//                    {
+//                        $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
+//                        $('#user_data').DataTable().destroy();
+//                        fetch_data();
+//                    }
+//                });
+//                setInterval(function () {
+//                    $('#alert_message').html('');
+//                }, 5000);
+//            } else
+//            {
+//                alert("Both Fields is required");
+//            }
+//        });
+//
+//        $(document).on('click', '.delete', function () {
+//            var id = $(this).attr("cod");
+//            if (confirm("Are you sure you want to remove this?"))
+//            {
+//                $.ajax({
+//                    url: "delete.php",
+//                    method: "POST",
+//                    data: {cod: cod},
+//                    success: function (data) {
+//                        $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
+//                        $('#user_data').DataTable().destroy();
+//                        fetch_data();
+//                    }
+//                });
+//                setInterval(function () {
+//                    $('#alert_message').html('');
+//                }, 5000);
+//            }
+//        });
+    });
+</script>
